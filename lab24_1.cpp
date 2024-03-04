@@ -64,3 +64,26 @@ void List::append(int d){
 }
 
 //Write List::remove() here
+void List::remove(int idx) {
+    if (idx >= size || idx < 0) {
+        cout << "Invalid index.\n";
+        return;
+    }
+    Node *temp = root;
+    if (idx == 0) {
+        root = root->next;
+        delete temp;
+        return;
+    }
+    for (int i = 0; temp != NULL && i < idx - 1; i++) {
+        temp = temp->next;
+    }
+    if (temp == NULL || temp->next == NULL) {
+        cout << "Invalid index.\n";
+        return;
+    }
+    Node *nextNode = temp->next->next;
+    delete temp->next;
+    temp->next = nextNode;
+    size--;
+}
